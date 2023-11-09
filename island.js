@@ -22,33 +22,36 @@ function getNeighbors(row, col, graph) {
 function islandSize(row, col, graph) {
   // Create a visited set to store visited nodes
   // Put the stringified starting node in visited
-  const visited = new Set().add([row, col]);
+  const visited = new Set().add([row, col].toString());
+
   // Create a stack, put the starting node in the stack
   const stack = [[row, col]];
+
   // Initialize size to 0
   let size = 0;
+
   // While the stack is not empty,
   while (stack.length) {
     // Pop the first node
     const curr = stack.pop();
-    // let [row1, col1] = curr;
+    let [row1, col1] = curr
     // DO THE THING (increment size by 1)
     size++;
-    const neighbors = getNeighbors(row, col, graph);
-    console.log(neighbors);
 
+    const neighbors = getNeighbors(row1, col1, graph);
     // // Then push all the UNVISITED neighbors on top of the stack
     // // and mark them as visited
     neighbors.forEach((neighbor) => {
       if (!visited.has(neighbor.toString())) {
         stack.push(neighbor);
         visited.add(neighbor.toString());
-        size++;
+        // console.log(neighbors)
       }
     });
     // HINT: This is what your helper function `getNeighbors` is for
     // HINT: Remember, you're storing your visited nodes as strings!
   }
+  // console.log(visited)
   return size;
 }
 
